@@ -1,66 +1,66 @@
 ---
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
-# Capítulo 5 : Contexto e Inferência Bayesiana
+# Chapter 5: Bayesian Context and Inference
 
-## Probabilidades
-*"O provável é aquilo que acontece na maioria das vezes"*, Aristóteles, Retórica.  
+## Probabilities
+*For that which is probable is that which generally happens*. Aristotle, Rhetoric.
 
-Uma abordagem probabilística da matemática aplicada que tem se popularizado é a de *Inferência Bayesiana*. Os procedimentos apresentados antes são usualmente chamados de *frequencistas*. 
-Muitas vezes, a informação obtida é quase idêntica, mas a perspectiva muda de forma consideravel.     
+A probabilistic approach to applied mathematics that has become popular is * Bayesian Inference *. The procedures presented before are usually called *frequencists*.
+Often, the information obtained is almost identical, but the perspective changes considerably.  
 
-Por princípio, usamos caminhos diferentes.  
+By principle, we use different paths.  
 
-**Frequencistas e Bayesianos**
+**Frequencists and Bayesians**
 
-Abordagens frequencistas situam probabilidades como aproximações para cenários com um número infinito de eventos. Os exemplos visitados nos primeiros capítulos muitas vezes faziam essa analogia. 
+Frequencist approaches place probabilities as approximations for scenarios with an infinite number of events. The examples visited in the first chapters use this analogy.  
 
-Retomando um exemplo trivial: se jogarmos uma moeda honesta infinitas vezes, a proporção de *caras* tende a que valor? Para muitos sorteios, a proporção tende a 0,5.  
-Simulação:  
-```r
-    > set.seed(2600)
-    > coin_t <- function(x) {
-    sample(size=x,x=c(0,1), prob = c(0.5,0.5), replace = T) %>%
-    (function(y) sum(y)/length(y))}
-    > coin_t(3)
-    [1] 0.6666667
-    > coin_t(10)
-    [1] 0.4
-    > coin_t(30)
-    [1] 0.5666667
-    > coin_t(100)
-    [1] 0.51
-    > coin_t(1000)
-    [1] 0.498
-    > coin_t(100000)
-    [1] 0.50098
-    > coin_t(10000000)
-    [1] 0.4999367
+Returning to a trivial example: if we play an honest coin endlessly, the relative frequency of *heads* converges to what value? For large trials, it approximates 0.5.  
+
+Simulation:  
+```julia
+    julia>using Random
+    julia>Random.seed!(2600)
+    julia>function trial_t(n_trials::Int)
+        r_trials = bitrand(n_trials) |> x -> map(Int64,x)
+        sum(r_trials)/length(r_trials)
+    end  
+    julia> trial_t(10)
+    0.6      
+    julia> trial_t(100)
+    0.43       
+    julia> trial_t(1000)
+    0.482      
+    julia> trial_t(100000)
+    0.50019      
+    julia> trial_t(10000000)
+    0.4999909
 ```  
+The notion of hypothetical infinite populations or procedures os fairly common.  
+The hypothetical-deductive method relates theories to observations through falsifiable hypotheses. The most accepted conception, recently compiled by K. Popper, deals directly with probabilities as important entities for the natural sciences.  
+More than that, it illustrates the concept of calculating the plausibility of experimental results considering the validity of a given hypothesis being studied.  
 
-É comum a ideia de populações ou procedimentos hipotéticos infinitos.  
-O método hipotético-dedutivo relaciona teorias a observações através de hipóteses falseáveis. A concepção mais aceita, compilada recentemente por K. Popper, trata diretamente de probabilidades como entes importantes para as ciências naturais.  
-Mais que isso, ilustra o conceito de calcular a plausibilidade de resultados experimentais na vigência de uma hipótese em estudo.  
+We calculate probabilities associated with the occurrence of an observation. In the t-test for two samples (chapter 1), we defined the null hypothesis as a function of the sample means ($\mu$) and other parameters ($\sigma$, $\text{df}$).  
+$$H_{0}: \mu_{sample_{1}} = \mu_{sample_{2}}$$.  
 
-Calculamos uma probabilidade associada à ocorrência de uma observação. No teste t para duas amostras (capítulo 1), definimos a hipótese nula em função das médias dos bicos($\mu$) e outros parâmetros ($\sigma$,$df$). $H_{0} : \mu_{amostra_{1}} = \mu_{amostra_{2}}$.  
-O procedimento de imaginar os eventos observados como instâncias de uma família de eventos semelhantes se adequada perfeitamente a preceitos Popperianos. Continua sendo o feijão com arroz da ciência normal para testar previsões de um determinado paradigma. O refinamento gradual de uma teoria envolve o acúmulo de conhecimento e testagem de *hipóteses auxiliares* resultantes de premissas basilares (*hard core* na terminologia de Imre Lakatos).  
+The procedure of imagining events observed as instances of a family of similar events is perfectly suited to Popperian precepts. It is also expressed in Hugh Everett`s *Many-Worlds* interpretation of naturally probabilistic phenomena in quantum mechanics. It remains the bread and butter of normal science to test predictions of a particular paradigm. The gradual refinement of a theory involves the accumulation of knowledge and testing of *auxiliary hypotheses* resulting from basic assumptions (*hard core* using Imre Lakatos terminology).  
 
-Prismas bayesianos instrumentalizam probabilidades como entes primitivos, noções mais básicas relacionadas a *plausibilidade*, *grau de crença*, *expectativa* para uma determinada situação. 
-O ponto chave é de que deixamos de guiar os procedimentos objetivando uma probabilidade para os eventos.  
-As probabilidades em si passam a ser entidades centrais. Especificamente, como nossas crenças sobre algo mudam após observações.  
+Bayesian prisms orchestrate probabilities as primitive beings. A basic notion related to *plausibility*, *degree of belief*, *expectation* for a given situation.  
+The key point is that we no longer guide the procedures aiming at a probability for events.  
+The probabilities themselves become central entities. Specifically, how our beliefs about something is changed after observations.  
 
-No caso dos pássaros:  
+In the case of Darwin`s birds:  
 
-*Inferência Frequencista*: Supondo que a diferença média entre tamanho dos bicos seja 0, qual a probabilidade para minhas observações?   
-Sendo $H_0$ definida por $H_0 : \mu_{amostra_{1}} = \mu_{amostra_{2}}$, queremos saber:  
-$P(H_0) < 0,05$?  
+*Frequencist*: Assuming the average size difference between samples is 0, what is the probability for my observations?  
+Since $H_{0}$ is defined by $H_{0}: \mu_{sample_{1}} = \mu_{sample_{2}}$, we want to know:  
+$P(H_{0}) < 0.05$?   
 
-*Inferência Bayesiana*: Quais as probabilidades associadas aos valores possíveis para a diferença entre  $\mu_{amostra_{1}}$ e $\mu_{amostra_{2}}$? Considerando um modelo e os dados, qual a distribuição probabilística de $\mu_\mathit{diff_{1-2}}$   
-$P(\mu_\mathit{diff_{1-2}}) = ?$  
+*Bayesian Inference*: What are the probabilities describing possible values for the difference between $\text{sample}_{1}$ and $\text{sample}_{2}$? Considering a model and the data, what is the probabilistic distribution of $\mu_{\mathit{diff_{1-2}}}$  
+$$P(\mu_{\mathit{diff_{1-2}}})=?$$  
 
-Além de construtos intuitivos, uma plataforma bayesiana oferece dois recursos poderosos: sensibilidade a informações prévias sobre um fenomeno (*priors*) e estimadores estocásticos  (e.g.*Markov Chain Monte Carlo*). Assim, podemos (1) fazer uso de informações arbitrárias (e.g. intuição de um especialista) e (2) reduzir a dependência de soluções analíticas (fechadas) para equações que descrevem os modelos.  
+In addition to intuitive constructs, a Bayesian platform offers two powerful features:   sensitivity to prior information about a phenomenon (*priors*) and stochastic estimators (eg* Markov Chain Monte Carlo*) are an efficient way. Thus, we can (1) make use of arbitrary information (e.g. expert intuition) and (2) reduce the dependence of (closed) analytic solutions to equations describing the models.  
 
 ---  
 
