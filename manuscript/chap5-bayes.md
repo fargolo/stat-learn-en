@@ -64,71 +64,71 @@ In addition to intuitive constructs, a Bayesian platform offers two powerful fea
 
 ---  
 
-#### Epistemologia Bayesiana?
+#### Bayesian Epistemology?
 
-Antes, associamos cenários a hipóteses e estimamos parâmetros (probabilidades) para testá-las. Agora, os *parâmetros* têm um papel conceitual mais central.  
+Previously, we associated scenarios with hypotheses and estimated parameters (probabilities) to test them. Now, *parameters* have a central conceptual role.  
 
-Um parâmetro é um símbolo, uma aproximação para uma ideia (*para*, "perto", *metron*, "medida"). Nos capítulos iniciais, usamos parâmetros para construtos que se comportam como números (e.g: existem elementos que podem ser ordenados por alguma noção de tamanho e operações, como soma e multiplicação).  
+A parameter is a symbol, an approximation for an idea (*para*, "near", *metron*, "measure"). In the initial chapters, we use parameters for constructs that behave as numbers (e.g. there are elements that can be ordered by some notion of size, and operations such as sum and multiplication).  
 
-Estimamos parâmetros($\mu_{\text{diff}}$ e valor p) para testar uma hipótese sobre a diferença média entre tamanho dos bicos nas espécies A e B. No capítulo 2, um parâmetro ($\beta$ e um valor p) para testar uma hipótese sobre a correlação entre expectativa de vida saudavel e número de médicos em um país. Mais do que isso, usamos estatísticas para testar hipóteses e calcular intervalos de confiança.  
+We estimated parameters ($\mu_{\text{diff}}$ and p value) to test a hypothesis about the mean difference between in beak size among species A and B. In Chapter 2, we used a parameter ($\beta$ and a p value) to test a hypothesis about the correlation between healthy life expectancy and number of doctors in a country. More than that, we used the corresponding statistics to test hypotheses and calculate confidence intervals.  
 
-É muito difícil entender a utilidade dos procedimentos anteriores desconhecendo o norte hipotético-dedutivo guiando-os. O seguinte trecho está em *Data Analysis, A Bayesian Tutorial* (Sivia & Skilling, 2006), de professores da Oxford: *"The masters, such as Fisher, Neyman and Pearson, provided a variety of different principles, which has merely resulted in a plethora of tests and procedures **without any clear underlying rationale**. This **lack of unifying principles** is, perhaps, at the heart of the shortcomings of the cook-book approach to statistics that students are often taught even today."*  
+It is very difficult to understand the usefulness of previous procedures by not knowing the hypothetical-deductive north leading them. The following excerpt is in *Data Analysis, The Bayesian Tutorial* (Sivia & Skilling, 2006), from Oxford professors: *"The masters, such as Fisher, Neyman and Pearson, provided a variety of different principles, which has merely resulted in a plethora of tests and procedures **without any clear underlying rationale**. This **lack of unifying principles** is, perhaps, at the heart of the shortcomings of the cook-book approach to statistics that students are often taught even today."*  
 
-Podemos, inclusive, usar probabilidades obtidas via inferência bayesiana para continuar testando hipóteses. Entretanto, é conveniente introduzir ferramentas bayesianas junto ao pensamento de filósofos que ofereceram outras alternativas[^27].  
+We could use probabilities obtained via Bayesian inference to continue testing hypotheses. However, it is convenient to introduce Bayesian tools to the thinking of philosophers who have offered other alternatives [^ 27].  
 
-[^27]:Existe um programa de pesquisa mais abrangente em filosofia sobre epistemologia Bayesiana, mas este não é nosso foco.
+[^ 27]: There is a more comprehensive research program in philosophy on Bayesian epistemology, but this is not our focus.  
 
-## Muitos métodos científicos: Feyerabend, Carnap e Quine
+## More than one scientific methods: Feyerabend, Carnap and Quine
 
-No primeiro capítulo, entramos em contato com o método hipotético-dedutivo e a falseabilidade como critério de demarcação científica. Apesar de dominante, esse racional possui vulnerabilidades interessantes. Entenderemos melhor argumentos contrários e propostas alternativas através de três filósofos do século XX. Esse é um momento conveniente, uma vez que tiramos os holofotes das hipóteses.    
+In the first chapter, we met the hypothetical-deductive method and falsifiability as the criterion of scientific demarcation. Although dominant, this rational has interesting vulnerabilities. We will better understand opposing arguments and alternative proposals through three twentieth-century philosophers. This is convenient time, as we turn the spotlights away from hypotheses.  
 
-**Paul Feyerabend (1924 - 1994)**
+**Paul Feyerabend (1924 - 1994)**  
 
-Conhecido pela personalidade ímpar e por ideias radicais, Paul Feyerabend, em *Contra o Método*(1975), argumenta que boa parte dos avanços significativos aconteceram fora do método científico.   
+Known for his unique personality and radical ideas, Paul Feyerabend, in "Against Method" (1975), argues that most of historical breakthroughs occurred desregarding the scientific method.  
 
-Crenças pessoais e detalhes biográficos são responsáveis por mudanças em nosso conhecimento. Mais que isso, usar falsificabilidade e o método hipotético-dedutivo teriam nos feito rejeitar o heliocentrismo e outras ideias chave para o progresso. Na verdade, o sistema geocêntrico (Terra no centro do sistema) de Ptolomeu era mais acurado (!) que o de Copérnico (Sol ao centro) usando um mesmo número de parâmetros para cálculos das órbitas. O modelo copernicano estava mais próximo da realidade como entendida hoje, porém o estágio intermediário de concepção teórica era 'pior' [^28].    
+Personal beliefs and biographical details are responsible for changes in our knowledge. Moreover, using falsifiability and the hypothetical-deductive method would have made us reject heliocentrism and other key ideas for progress. In fact, Ptolemy's geocentric system (Earth at the center of the system) was better than that of Copernicus (Sun at the center) using the same number of parameters for calculations of orbits. The Copernican model was closer to reality as it is understood today, but the intermediate stage of theoretical conception was 'worse' [^28].  
 
-Além de menos acurado, era mais complexo em alguns aspectos, incluindo mais epiciclos: órbitas auxiliares usadas como artifício para cálculos. A Revolução Copernicana somente consolidou a mudança de paradigma com contribuições subsequentes de de Tycho Brahe, Kepler, Galileo e Newton, cerca de 1 século depois.
+In addition to being less accurate, it was more complex in some respects, including more epicycles: auxiliary orbits used as artifice for calculations. The Copernican Revolution only consolidated the paradigm shift with subsequent contributions by Tycho Brahe, Kepler, Galileo, and Newton, about 1 century later.  
 
-![](images/chap5-orbits.jpg)
+![](images/chap5-orbits.jpg)  
 
-[^28]: Stanley E. Babb, “Accuracy of Planetary Theories, Particularly for Mars”, Isis, Sep. 1977, pp. 426
+[^28]: Stanley E. Babb, "Accuracy of Planetary Theories, Particularly for Mars," Isis, Sep. 1977, pp. 426  
 
-Diante das incongruências entre um método e as inevitáveis imprevisibilidades da empreitada humana em conhecer o Universo, Feyerabend propõe o *anarquismo epistêmico* sob o mote *"Anything goes"* ('Vale tudo'). Isto é, quaisquer recursos são válidos na tentativa de atacar um problema ou conceber um modelo de realidade.  
+Faced with the conflicts between a method and the inevitable unpredictability of human endeavor to know the Universe, Feyerabend proposes epistemic anarchism under the motto "Anything goes". That is, any assets are valid when attempting to attack a problem or designing a model of reality.  
 
-É tentador pensar que, dada a profundidade do trabalho, a defesa de uma postura tão contundente é obviamente uma aplicação dos preceitos defendidos no livro como necessários para disseminar uma idéia. Outros filósofos nos ajudam a conceber uma ciência não pautada num método hipotético-dedutivo de maneira menos radical.  
+It is tempting to think that, given the depth of the work, defending such a blunt posture is an application of the precepts defended in the book as necessary to disseminate an idea. Other philosophers help us to conceive of a science not based on a hypothetical-deductive method in a less radical way.  
 
 \pagebreak
 
-**Rudolph Carnap (1891 - 1970)**  
+**Rudolph Carnap (1891 - 1970)**
 
-Carnap, do Círculo de Viena, também contrapôs Popper. Em  “Testability and Meaning” (1936-7), argumenta que falsificabilidade não difere de verificacionismo. Envolve a testagem de cada assertiva em si, um problema que [outros](https://en.wikipedia.org/wiki/Ludwig_Wittgenstein) também endereçaram.  
+Carnap, a member of the Vienna Circle, also countered Popper. In "Testability and Meaning" (1936-7), he argues that falsifiability does not differ from verificationism. It involves testing each assertion itself, a problem that [others] (https://plato.stanford.edu/entries/wittgenstein/) also addressed.  
+ 
+Faced with unexpected results in an experiment, the instinctive procedure for a scientist involves checking the integrity of the drawn conditions. Verifying sample composition, collection methods, data loss mechanisms, exclusion and inclusion criteria, assumptions of the analysis. This is not intellectual dishonesty: they are plausible, easily fixable factors that may have invalidated the underlying theory given result experiments. The same goes for techniques of analysis and conceptualization of constructs.  
 
-Diante de resultados inesperados em um experimento, o procedimento automático para um cientista envolve checar a integridade das condições desenhadas. Verificar a composição da amostra, os métodos de coleta, mecanismos de perda, critérios de exclusão e inclusão, premissas da análise. Isso não é desonestidade intelectual: são fatores menores reais e facilmente abordáveis que podem ter invalidado a teoria de base. O mesmo se dá para técnicas de análise e conceptualização de construtos.  
+Addressing these points is desirable and exposes the inevitable Achilles heel in falsifiability.
+It is impossible to refute a hypothesis / assertive in isolation. Each experimental or logical procedure involves an interdependence between its components.  
 
-O cuidado com esses pontos é desejável e desnuda o inevitável calcanhar de Aquiles da falsificabilidade.  
-É impossível refutar uma hipótese/assertiva de maneira isolada. Cada procedimento experimental ou lógico envolve a interdependência entre os símbolos usado.  
+**Willard van Orman Quine (1908 - 2000)**  
 
-**Willard van Orman Quine (1908 – 2000)**  
+A philosophical school starts from the problem above. Duhem-Quine's thesis postulates that it is impossible to test any scientific hypothesis, since there are always assumptions postulated to be true.  
 
-Uma escola filosófica parte do problema acima. A tese de Duhem-Quine postula que é impossível testar qualquer hipótese científica, uma vez que sempre há premissas aceitas como verdade.
+In 'The Two Dogmas of Empiricism', Quine considers propositions and logical relations between to be a single system, which can only be studied as a whole.  
+The exercises illustrated in the previous volume test the adequacy of the data to the distribution family *t*. It also assumes that beak sizes are measurable using numbers and that these can be compared with values from other samples.
 
-Em *‘Os dois dogmas do empiricismo’*, Quine considera as proposições e as relações lógicas entre elas apenas um sistema, que só pode ser estudado em conjunto.  
-Os exercícios ilustrados no volume anterior testa a adequação dos dados à família de distribuições t. Também assume que tamanhos dos bicos são mensuráveis usando números e que estes podem ser comparados com valores de outras amostras.  
+At first these statements seem trivial. However, considering the human aspects of science, changes in perspective are significant. Arguably, addressing a problem in this way is historically more fruitful. The most compelling contributions come from scientists dedicated to studying a context or problem as a whole. It is rare, perhaps unheard of, that a group testing hypotheses without a strong underlying theoretical axis has made remarkable strides.  
 
-A princípio, essas declarações parecem triviais. Entretanto, considerando os fatores humanos da ciência, a mudança de lentes é significativa. Discutivelmente, abordar um problema dessa maneira é historicamente mais frutífero. As contribuições mais contundentes são advindas de cientistas dedicados a estudar um contexto ou problema como um todo. É raro, talvez inédito, que um grupo testando hipóteses sem um eixo consistente tenha obtido avanços admiráveis.  
+In that sense, freely estimating the parameters we are talking about naturally is much more intuitive than tailoring an idea to hypothetical-deductive procedures.  
 
-Estimar livremente os parâmetros de que falamos naturalmente é muito mais intuitivo que adequar uma ideia aos procedimentos hipotético-dedutivos.  
+## Bayesian Inference
 
-## Inferência Bayesiana
+In Chapter 1, during a *t* test, we compute the *t* statistic corresponding to the differences found and then the probability of obtaining equal or more extreme values.
+It is possible to use Bayesian inference to analyze an identical situation. However, we are no longer interested in the p value.
+The question is *"What are the likely values for the difference between A and B?"*.  
 
-No capítulo 1, ao fazer um teste t, calculamos a estatística t correspondente às diferenças encontradas e então a probabilidade de obter valores iguais ou mais extremos.    
-É possível usar inferência bayesiana para analisar uma situação idêntica. Como aludido antes, não estamos muito interessados no valor p.  
-A pergunta é *“Quais são os valores prováveis para a diferença entre A e B?”*.
+The probabilistic distribution obtained is a representation of our beliefs in the plausibility of each value.  
 
-A distribuição probabilística obtida representa nossas crenças na plausibilidade de cada valor.
-
-Usando a library BEST e 30 observações retiradas de amostras de distribuição normal $(\mu_{a}=0; \mu_{b}=0.6; \sigma_{a} = \sigma_{b} = 1)$ normais.  
+Using the library BEST and 30 observations taken from normally distributed  samples $(\mu_{a}=0; \mu_{b}=0.6; \sigma_{a} = \sigma_{b} = 1)$.  
 
 ```r
     > library(ggthemes)
