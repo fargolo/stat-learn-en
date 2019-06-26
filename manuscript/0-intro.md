@@ -149,6 +149,7 @@ Philosophy and Science
 * Stanford Encyclopedia of Philosophy (https://plato.stanford.edu/) entries are valuable assets. Themes not mentioned above:  
   * Wittgenstein notion of language games  
   * Imre Lakatos conceptualization of Popper`s theory    
+* [The Open Handbook of Formal Epistemology](https://jonathanweisberg.org/post/open-handbook/)
 
 Neurosciences
 
