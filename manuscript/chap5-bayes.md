@@ -76,7 +76,7 @@ It is very difficult to understand the usefulness of previous procedures by not 
 
 We could use probabilities obtained via Bayesian inference to continue testing hypotheses. However, it is convenient to introduce Bayesian tools to the thinking of philosophers who have offered other alternatives [^ 27].  
 
-[^ 27]: There is a more comprehensive research program in philosophy on Bayesian epistemology, but this is not our focus.  
+[^ 27]: There is a more comprehensive research program in philosophy on Bayesian epistemology, but this is not our focus. Check [The Open Handbook of Formal Epistemology](https://jonathanweisberg.org/post/open-handbook/)
 
 ## More than one scientific methods: Feyerabend, Carnap and Quine
 
