@@ -151,45 +151,46 @@ Using the library BEST and 30 observations taken from normally distributed  samp
 ```
 ![](images/chap5-best.jpg)
 
-A distribuição no canto superior esquerdo corresponde às nossas estimativas para possíveis valores da diferença entre A e B. Podemos usar a média como estimativa pontual: $(\mathit{diff}_{\mu_{a}\mu_{b}}=-0.669)$. O intervalo apontado como 95% HDI (High density interval) contém 95% da distribuição.
-Seu significado é mais próximo da intuição de uma região provável para os valores que o clássico intervalo de confiança.  
+The distribution on the upper left corner corresponds to our estimates for plausible values of the difference between A and B. We can use the mean as a point estimate: $(\mathit{diff}_{\mu_{a}\mu_{b}}=-0.669)$. The range labeled as '95% HDI' (High Density Interval) contains 95% of the distribution.  
+Its meaning is closer to the intuition of a region likely to contain real values than standard confidence intervals obtained in frequentist procedures.  
 
-### Por trás das cortinas
+### Behind the curtains  
 
-Obviamente, vamos entender a arte envolvida aqui. A flexibilidade e o poder dos modelos bayesianos permite lidar com uma série de problemas dificilmente tratáveis de outra forma. Entretanto, é fácil cair em armadilhas ou esbarrar em dificuldades durante o processo.  
+Obviously, we wil understand the art involved here. The flexibility and power of Bayesian models allow us to deal with a series of problems that are difficult to treat in any other way. However, it is also easier to find pitfalls or run into difficulties during the process.  
 
-É extremamente importante entender os componentes envolvidos para não cometer erros importantes.  
+It is extremely important to understand the components involved, so as not to make major mistakes.  
 
-![https://xkcd.com/2059/ Teorema de Bayes modificado, incluindo a probabilidade de você estar usando estatística bayesiana correntamente](images/chap5-xkcd.jpg)
+![https://xkcd.com/2059/ Modified Bayes Theorem, including the probability that you are currently using Bayesian statistics](images/chap5-xkcd.jpg)  
 
-### O Teorema do Bayes 
+### The Bayes Theorem  
 
 $$P(B\mid A)= \frac{(A \mid B)P(B)}{P(A)}, P(A)\neq 0$$
-É a forma célebre do teorema e nos conta sobre probabilidades de eventos subsequentes/concorrentes.  
+The classical form of the theorem tells us about probabilities of subsequent/concurrent events.  
 
-Costuma ser apresentado para tratar problemas simples: *sabendo o resultado de um teste médico positivo, qual a probabilidade de o paciente ter a doença?*. O teorema de Bayes relaciona a probabilidade basal da doença com a probabilidade um teste positivo subsequente. Algumas armadilhas da intuição são quebradas: ainda que o teste tenha boa sensibilidade (probabilidade alta de resultado positivo diante da doença), a probabilidade será baixa se as chances basais também forem.    
+It is often presented to treat simple problems: *Knowing the result of a positive medical test, how likely is the patient to have the disease?*. Bayes' theorem relates the baseline probability of disease with the probability a subsequent positive test. Some results contradict intuition: even if the test has good sensitivity (high probability of positive results in the face of the disease), the probability will remain low if the baseline chances are also low.  
  
-O teorema foi concebido num esforço maior do reverendo (Thomas Bayes, 1701-1761) para um problema de inferência. Curiosamente, ele é bastante semelhante ao que empreenderemos.  
-Suponha que atribuímos uma probabilidade *p*($0 \leqslant p \leqslant 1$) para o lançamento de uma moeda com resultado *coroa*. Ao observar alguns resultados, podemos calibrar nossa estimativa. 
-Podemos começar supondo uma moeda honesta $0.5$. Com uma frequência alta de *coroas*, é racional aumentar a nossa estimativa sobre o valor de *p* $(p \sim 1)$. Bayes demonstrou como fazer essas atualizações diante de evidência.   
+The theorem was conceived in a greater effort of the Reverend Thomas Bayes (1701-1761) for an inference problem. Curiously, it is quite similar to what we will face.  
+Suppose we assign a probability *p*($0 \leqslant p \leqslant 1$) to coin trials *tails* result. By looking at some results, we can make our estimate.
+We can start by assuming an honest $0.5$ coin. With a high frequency of *tails*, it is rational to increase our estimate of *p* $(p \sim 1)$. Bayes demonstrated how to make these updates in the face of new evidence.  
 
-#### Intuições
 
-O texto de **An essay towards solving a Problem in the Doctrine of Chances (1973)** apresenta uma série de demonstrações até chegar ao enunciado:  
+#### Intuitions  
+
+The text of **An essay towards solving the Problem in the Doctrine of Chances (1973)** presents a series of demonstrations until arriving at the statement:  
 **Proposition 4** : *If there be two subesequent events be determined every day, and each day the probability of the 2nd [event] is $\frac{b}{N}$ and the probability of both $\frac{P}{N}$, and I am to receive N if both of the events happen the 1st day on which the 2nd does; I say, according to these conditions, the probability of my obtaining N is $\frac{P}{b}$. (...)*  
 
-O estilo é um pouco complicado. Com notação atual:   
-Considerando dois eventos subsequentes, *(1)* a probabilidade do segundo acontecer é $\frac{b}{N}$ ($P(A)$), *(2)* a probabilidade de ambos acontecerem é $\frac{P}{N}$ ($P(A \cap B$). *(3)* Sabendo que o segundo aconteceu, a probabilidade de o primeiro também ter acontecido é $\frac{P}{b}$.  $N$ é cancelado e *(3)* é a razão entre *(2)* e *(1)*: 
+The style is a bit complicated. Rephrasing:  
+Consider two subsequent events: *(1)* the probability of the second happening is é $\frac{b}{N}$ ($P(A)$), *(2)* the probability of both occurring is $\frac{P}{N}$ ($P(A \cap B$). *(3)* Knowing that the second happened, the probability that the first one also happened is $\frac{P}{b}$.  $N$ é cancelado e *(3)* é a razão entre *(2)* e *(1)*:  
  
 $$P(B\mid A)= \frac{P(A \cap B)}{P(A)}, P(A)\neq 0$$  
 
-Considerando dois eventos, **A** e **B**, a probabilidade de B acontecer sabendo que A aconteceu ($P(B\mid A)$) é idêntica à probabilidade de A e B ($P(A \cap B)$) acontecerem, normalizada pela probabilidade de A acontecer individualmente.  
+Considering two events, **A** and **B**, the probability of B occurring knowing that A happened ($P(B\mid A)$) is identical to the probability of A and B ($P(A \cap B)$) occuring, normalized by the probability of A occurring individually.  
 
-Pela definição de probabilidade condicional, $P(A \cap B) = P(A \mid B) P(B)$ , então:  
+By the definition of conditional probability, $P(A \cap B) = P(A \mid B) P(B)$, then:  
 
-$$P(B\mid A)= \frac{(A \mid B) \space P(B)}{P(A)}, P(A)\neq 0$$
+$$P(B\mid A)= \frac{(A \mid B) \space P(B)}{P(A)}, P(A)\neq 0$$  
 
-Assim, podemos estimar probabilidades de eventos. Em inferência Bayesiana, empregamos o teorema para estimar os valores prováveis (distribuição probabilística) de um parâmetro $(\theta)$ diante de observações ($X$).
+Thus, we can estimate probability for events. In Bayesian inference, we use the theorem to estimate plausible values (probabilistic distribution) for a given parameter ($\theta$) on the face of observations ($X$).  
 
 $$P(\theta \mid X) = \frac{ P(X \mid \theta) \space P(\theta) }{P(X)}, P(X) \neq 0$$
 
