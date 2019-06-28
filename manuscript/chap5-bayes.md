@@ -194,27 +194,27 @@ Thus, we can estimate probability for events. In Bayesian inference, we use the 
 
 $$P(\theta \mid X) = \frac{ P(X \mid \theta) \space P(\theta) }{P(X)}, P(X) \neq 0$$
 
-#### Posterior
-Chamamos o primeiro termo, a estimativa do parâmetro após a calibração pelas observações $P(\theta \mid X)$, de **distribuição posterior**(*posterior distribution* traduz bem para o português). Todos os procedimentos são desenhados para calculá-la e representa a distribuição usada nas inferências finais.  
-Por exemplo, queremos a distribuição posterior dos valores para a diferença entre A e B.   
+#### Posterior  
+We call the first term, the parameter estimate after calibration by the observations $P(\theta \mid X)$, **posterior distribution**. All procedures are designed to calculate it and represent the distribution used for final inferences.
+In our example, we would want the posterior distribution of the values for the difference between A and B.    
 
-#### Probabilidade marginal
-O denominador do termo à direita é a probabilidade independente para a ocorrência dos dados ($P(X)$). É usada para normalizar as quantidades e chamada de probabilidade/verossimilhança marginal, **marginal likelihood**, ou ainda evidência do modelo, **model evidence**.  
+#### Marginal Probability  
+The denominator of the term on the right is the independent probability for occurrence of the observations ($P(X)$). It is used to normalize quantities and we call it **marginal probability**, **marginal likelihood**, or even **model evidence**.    
 
 
-#### Likelihood
-O primeiro termo à direita, $P(X \mid \theta)$, chamamos de verossimilhança (**likelihood**) e determina a probabilidade de ocorrência das observações $P(X)$ dado um parâmetro $\theta$.  
-Provavelmente, é o ponto mais sensível na modelagem, pois descreve como se dá a relação entre modelo teórico e observações. Como discutido antes, equações correspondem a leis precisas envolvendo mais de um construto. O mapeamento entre observações $P(X)$ e um parâmetro  é dado pela *função de verossimilhança* (**likelihood function**) escolhida, $f(\theta)$.  
-Exemplo: o número de células de combate do sistema imune circulante no sangue está associado a uma resposta inflamatória. Quanto mais alto, mais provável é uma infecção para o médico. Mas qual a lei que associa o número de células (entre $0$ e $10^5$)
-com a probabilidade de infecção?  
-Se os desfechos estudados são binários ($y_{i} \in  \{ 0,1 \}$, e.g. diagnóstico positivo ou negativo), podemos usar uma relação logística (ver Cap. 4) para estimar probabilidades em função de variáveis observadas ($X$) e parâmetro(s) $\theta$.  
+#### Likelihood  
+We call the first term on the right, $P(X \mid \theta)$, **likelihood**. It determines the probability of occurrence of observations $P(X)$ given a parameter $\ theta$.  
+It is probably the most sensitive point in modeling, since *it describes how the relation between theoretical model and observations occurs*. As discussed earlier, equations correspond to precise laws involving more than one construct. The mapping between observations $P(X)$ and a parameter is given by the **likelihood function**, $f(\theta)$.  
+Example: The number of combat white cells circulating in the blood is associated with an inflammatory response. The higher, the more likely that an infection is occurring. But what law associates the number of cells (between $0$ and $10^5$) with  probabilities of infection?  
+If the outcomes studied are binary ($y_{i} \in  \{ 0,1 \}$, e.g. positive or negative diagnosis), we can use a logistic relation (see Chapter 4) to estimate probabilities against observed variables ($X$) and parameter (s) $\theta$.  
 $$P(X \mid \theta) \sim f(X, \theta) : y_{i} = \frac{1}{1+e^{-(\theta * x_{i} + c)}}$$  
-Outras funções poderia ser escolhidas (e.g. Heaviside step do capítulo anterior). Isto depende do do fenômeno, da teoria e das medidas analizadas. 
+Other functions could be chosen, such as the Heaviside step from the previous chapter. This depends on the phenomenon, the theory and the measures analyzed.  
 
-#### Priors
-Como estimamos as probabilidades infecção antes de ver os resultados do teste? Antes exame, temos alguma noção de como o parâmetro se comporta. 
-Ela pode ser bem precisa ou trazer muita incerteza. Chamamos a estimativa basal $P(\theta)$ de **prior** e aparece na expressão multiplicando o valor da verossimilhança.  
-Em linguagem das probabilidades, ela é uma distribuição. Nossas crenças prévias podem ser pouco informativas (e.g. não examinamos o paciente; distribuição uniforme sobre os valores possíveis) ou bastante definidas (e.g. o paciente está assintomático; distribuição concentrada nas proximidades de 0).  
+#### Priors  
+How do we estimate the infection probabilities before seeing the test results? Before the exam, we have some notion of how the parameter behaves.  
+It can be very accurate or it can bring a lot of uncertainty. We call the basal estimate $P(\theta)$ **prior** and it appears in the expression multiplying the likelihood value.  
+In the language of probabilities, it is a distribution. Our prior beliefs may be poorly informative (e.g., we did not examine the patient: uniform distribution over possible values) or fairly defined (e.g., patient is asymptomatic: distribution almost entirely concentrated in the proximities of 0).  
+
 
 ```r
     > a <- runif(10000)
@@ -231,19 +231,18 @@ Em linguagem das probabilidades, ela é uma distribuição. Nossas crenças pré
     theme_hc(style="darkunica")+theme(axis.text.y=element_blank())
 
 ```
-![O prior verde supõe maiores probabilidades para valores baixos. O prior amarelo é pouco informativo, atribuindo probabilidades semelhantes em todo o intervalo](images/chap5-priors.png)
+![The green prior assumes higher probabilities for low values. The yellow prior is not informative, assigning similar probabilities throughout the range](images/chap5-priors.png)  
 
+Knowing our constructs, we can then rewrite procedures:
+$$\text{Posterior} = \frac{\text{Probabilities for observations given} f(X,\theta) * \text{Prior}}{\text{Marginal probabilities for observations}}$$   
 
-Conhecendo nossos construtos, podemos então reescrever os procedimentos:  
-$$\text{Posterior} = \frac{\text{Prob. de observações dada por} f(X,\theta) * \text{Prior}}{\text{Prob. marginal para observações}}$$ 
+To obtain the *posterior* distribution, we multiply the probability given by the *likelihood function* by our previous estimates (*prior*) and normalize them by the *marginal probability* of the observations.
 
-Para obtermos o *posterior*, multiplicamos a probabilidade dada pela *função de verossimilhança* pelas nossas estimativas prévias (*prior*) e normalizamos pela *probabilidade marginal* das observações.  
-
-As narrativas posteriores são construídas de acordo com a distribuição do *posterior*.  
+Subsequent results are constructed according to the distribution of the *later*.  
 
 ---  
 
-**Mestre Foo e o Recrutador**[^29]
+**Mestre Foo e o Recrutador**[^29]  
 
 Um recrutador técnico, ao descobrir que os caminhos dos hackers Unix lhe eram estrahos, buscou conversar com Mestre Foo para aprender sobre o Caminho. Mestre Foo encontrou o recruta nos escritórios de recursos humanos de uma grande corporação.  
 
