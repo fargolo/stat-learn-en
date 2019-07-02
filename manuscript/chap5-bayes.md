@@ -244,19 +244,19 @@ Subsequent results are constructed according to the distribution of the *later*.
 
 **Mestre Foo e o Recrutador**[^29]  
 
-Um recrutador técnico, ao descobrir que os caminhos dos hackers Unix lhe eram estrahos, buscou conversar com Mestre Foo para aprender sobre o Caminho. Mestre Foo encontrou o recruta nos escritórios de recursos humanos de uma grande corporação.  
+A technical recruiter, having discovered that that the ways of Unix hackers were strange to him, sought an audience with Master Foo to learn more about the Way. Master Foo met the recruiter in the HR offices of a large firm.  
 
-O recruta disse, “Eu tenho observado que os hackers Unix desdenham ou ficam nervosos quando pergunto a eles quantos anos de experiência têm em uma linguagem de programação nova. Por que isso acontece?"  
+The recruiter said, “I have observed that Unix hackers scowl or become annoyed when I ask them how many years of experience they have in a new programming language. Why is this so?”  
 
-Mestre Foo levantou e começou a caminhar pelo escritório. O recrutador ficou intrigado, e perguntou "O que está fazendo"?  
+Master Foo stood, and began to pace across the office floor. The recruiter was puzzled, and asked “What are you doing?”  
 
-“Estou aprendendo a andar", replicou Mestre Foo.  
+“I am learning to walk,” replied Master Foo.  
 
-“Eu vi você entrar pela porta andando” o recrutador exclamou, “e você não está tropeçando em seus pés. Obviamente, você sabe como andar.”  
+“I saw you walk through that door” the recruiter exclaimed, “and you are not stumbling over your own feet. Obviously you already know how to walk.”  
 
-“Sim, mas este piso é novo para mim” replicou Mestre Foo.  
+“Yes, but this floor is new to me.” replied Master Foo.  
 
-Ao ouvir isso, o recrutador foi iluminado.  
+Upon hearing this, the recruiter was enlightened.  
 
 [^29]: http://www.catb.org/~esr/writings/unix-koans/recruiter.html  
 
@@ -264,32 +264,33 @@ Ao ouvir isso, o recrutador foi iluminado.
 
 ### Dear Stan
 
-As implementações dos modelos Bayesianos são feitas em Stan, um pacote em C++  especializado em inferência bayesiana. Os modelos são escritos num dialeto próprio, mas a sintaxe é bastante semelhante à da notação matemática, então a tradução das análises do capítulo é direta.  
-Especificamos o modelo num arquivo auxiliar de extensão *.stan*, que é manipulado por pacotes em R para visualização e outras utilidades.  
+The Bayesian models here are implemeneted with Stan, a C ++ package specialized in Bayesian inference. The models are written in a dialect of their own, but the syntax is quite similar to that of standard mathematical notation, so the translation of the chapter analyzes is straightforward.
+We specify the model in an * .stan * extension file, which is handled by wrappers (e.g. rstan, CmdStan.jl) for visualization and other utilities.  
 
-**Lá e de volta outra vez**  
+**There and back again**  
 
-Reproduziremos à maneira bayesiana dois exemplos conhecidos: diferença entre médias (análogo ao test t) e correlação.  
+We shall reproduce two known examples in the Bayesian manner: difference between means (analogous to test t) and correlation.
 
-Aqui, fica claro que o racional é mais direto que o anterior.  
+Here we make it clear that the rational is more direct than the former procedures of hypothesis testing.  
 
-#### Comparando amostras de distribuição normal
+#### Comparing Normal Distribution Samples
 
-Lembremos (cap. 1) que, para comparar amostras usando o teste t: (1) assumimos normalidade na origem dos dados; (2) imaginamos a distribuição das médias normalizadas pelo erro padrão em amostras hipotéticas semelhantes, retiradas da mesma população; (3) calculamos o valor p conhendo a distribuição (Student's t).  
+Let us recall (Chapter 1) that in order to compare samples using the t test: (1) we assume our sample is taken from a population whose measure are normally distributed values; (2) we imagine the distribution of normalized means in similar hypothetical samples taken from the same population: they folow a Student`t distribution; (3) we compute the p value according to *t* statistic calculated with observed data: mean ($\mu$) and sample size ($n \sim df_{t}$).  
 
-Agora, podemos obter uma distribuição posterior para a diferença entre amostras.  
-(1) Assumimos a normalidade na origem dos dados (likelihood function); (2) fornecemos nossas estimativas prévias (prior); (3) atualizamos os valores diante dos dados e para obter o posterior.  
+Instead, we can now obtain a *posterior distribution* for the difference between samples.  
+(1) As before, we assume normality (*likelihood function*) of values in the population; (2) we provide our previous estimates (prior) of such difference; (3) we update the values considering the data and to obtain the *posterior*.  
 
-Adotamos a seguinte parametrização:
+Let`s use the following parameterization:  
 
-Valores observados nas amostras 1 e 2, vetores $N$ dimensões: $y_{1}, y_{2}$  
-Parâmetros alvo desconhecidos, as médias em cada amostra e um desvio-padrão em comum: $\mu_{1}, \mu_{2}, \sigma$  
-Priors supondo média 0 em ambos os grupos e desvio-padrão de 1: $mu_{1} \sim N(0,1), mu_{2} \sim N(0,1), \sigma \sim N(1,1)$
-Função de verossimilhança, indicando que cada observação é de uma população com distribuição normal: $y \sim N(\mu,\sigma)$ 
+Values observed in samples 1 and 2, vectors $N$ dimensions: $y_{1}, y_{2}$  
+Unknown target parameters, the means in each sample, and a common standard deviation:  $\mu_{1}, \mu_{2}, \sigma$  
+Priors assuming mean 0 in both groups and standard deviation of 1: $mu_{1} \sim N(0,1), mu_{2} \sim N(0,1), \sigma \sim N(1,1)$  
+Likelihood function, indicating that each observation is taken from a population whose value are normally distributed: $y \sim N(\mu,\sigma)$  
 
-Também especificamos para o Stan que gere (1) valores para diferença entre as distribuições posteriores de $\mu_{1}$ e $\mu_{2}$, $\mu_{\text{diff}}$ e (2) tamanho de efeito com D de Cohen, dividindo o valor pelo desvio-padrão.  
+We also set Stan to generate (1) values for the difference between the posterior distributions of $\mu_{1}$, $\mu_{2}$, $\mu_{\text{diff}}$ and (2) effect size with Cohen's D, dividing the value by the standard deviation.  
 
-O código deve ser salvo num arquivo ".stan".  
+The code should be passed as a string of saved to ".stan" file.  
+
 ```
 data {
   int<lower=0> N;
@@ -321,8 +322,8 @@ generated quantities{
   cohenD = mudiff/sigma;
 }
 ```
- 
-Então, vamos iniciar as análises através da interface em R. Criamos uma lista com componentes homônimos às variáveis do arquivo Stan (y_1: amostral 1, y_2: amostra 2, N: tamanho amostral).
+
+Then we start the analysis through the interface in R. We create a list with components homonymous with the Stan file variables (y_1: sample 1, y_2: sample 2, N: sample size).  
 
 ```r
     > a <- rnorm(n = 100, sd = 1, mean = 0)
@@ -334,7 +335,7 @@ Então, vamos iniciar as análises através da interface em R. Criamos uma lista
      SAMPLING FOR MODEL 'bayes-t' NOW (CHAIN 1).
      (...)
 ```
-O comando acima iniciará os cálculos. Vamos plotar as distribuições posteriores de $\mu_{1}$, $\mu_{2}$ e a diferença entre essas ($\mu_{\text{diff}}$)
+The above command will start the calculations. Let us plot the posterior distributions of $\mu1$, $\mu2$, and the difference between these ($\mu_{\text{diff}}$).  
 
 ```r
     > obs_diff <- mean(a) - mean(b)
@@ -362,7 +363,7 @@ O comando acima iniciará os cálculos. Vamos plotar as distribuições posterio
 ```
 ![](images/chap5-diff-bayes.png)
 
-A distribuição acima contém outras informações. Perdemos a elegante estimativa analítica de Student para testar a hipótese sobre um parâmetro(e.g. $H_{0}: \mu_{\text{diff}} = 0$). Por outro lado, temos uma visão global sobre toda a distribuição estimada para $\mu_{\text{diff}}$!  
+The distribution above contains further information. We missed the elegant Student's analytic estimate to test the hypothesis on a parameter (e.g., $H_{0}: \mu_{\text{diff}} = 0$). On the other hand, we have a global view on the entire estimated distribution for $\mu_{\text{diff}}$!  
 
 --- 
 
